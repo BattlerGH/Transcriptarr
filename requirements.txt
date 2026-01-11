@@ -1,10 +1,33 @@
-numpy
-stable-ts
+# Core dependencies
 fastapi
-requests
-faster-whisper
-uvicorn
+uvicorn[standard]
 python-multipart
+requests
+python-dotenv>=1.0.0
+
+# Database & ORM (SQLite is built-in)
+sqlalchemy>=2.0.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# Media processing (CPU-only by default)
+numpy
 ffmpeg-python
-whisper
 watchdog
+
+# Optional dependencies (install based on configuration):
+#
+# For PostgreSQL database:
+#   pip install psycopg2-binary
+#
+# For MariaDB/MySQL database:
+#   pip install pymysql
+#
+# For Whisper transcription:
+#   pip install openai-whisper faster-whisper stable-ts
+#
+# For GPU support (NVIDIA):
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#
+# For media file handling:
+#   pip install av>=10.0.0
