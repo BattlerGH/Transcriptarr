@@ -42,7 +42,7 @@ def prompt_and_save_bazarr_env_variables():
     print(instructions)
     env_vars = {
         'WHISPER_MODEL': ('Whisper Model', 'Enter the Whisper model you want to run: tiny, tiny.en, base, base.en, small, small.en, medium, medium.en, large, distil-large-v2, distil-medium.en, distil-small.en', 'medium'),
-        'WEBHOOKPORT': ('Webhook Port', 'Default listening port for subgen.py', '9000'),
+        'WEBHOOKPORT': ('Webhook Port', 'Default listening port for transcriptarr.py', '9000'),
         'TRANSCRIBE_DEVICE': ('Transcribe Device', 'Set as cpu or gpu', 'gpu'),
         # Defaulting to False here for the prompt, user can change
         'DEBUG': ('Debug', 'Enable debug logging (true/false)', 'False'),
@@ -51,13 +51,13 @@ def prompt_and_save_bazarr_env_variables():
     }
 
     user_input = {}
-    with open('subgen.env', 'w') as file:
+    with open('.env', 'w') as file:
         for var, (description, prompt, default) in env_vars.items():
             value = input(f"{prompt} [{default}]: ") or default
             file.write(f"{var}={value}\n")
-    print("Environment variables have been saved to subgen.env")
+    print("Environment variables have been saved to .env")
 
-def load_env_variables(env_filename='subgen.env'):
+def load_env_variables(env_filename='.env'):
     try:
         with open(env_filename, 'r') as file:
             for line in file:
@@ -93,7 +93,7 @@ def main():
     # Changed: action='store_true'
     parser.add_argument('-a', '--append', action='store_true', help="Append 'Transcribed by whisper' (overrides .env and external ENV)")
     parser.add_argument('-u', '--update', action='store_true', help="Update Subgen")
-    parser.add_argument('-x', '--exit-early', action='store_true', help="Exit without running subgen.py")
+    parser.add_argument('-x', '--exit-early', action='store_true', help="Exit without running transcriptarr.py")
     parser.add_argument('-s', '--setup-bazarr', action='store_true', help="Prompt for common Bazarr setup parameters and save them for future runs")
     parser.add_argument('-b', '--branch', type=str, default='main', help='Specify the branch to download from')
     parser.add_argument('-l', '--launcher-update', action='store_true', help="Update launcher.py and re-launch")
@@ -126,7 +126,7 @@ def main():
         # After saving, load them immediately for this run
         load_env_variables()
     else:
-        # Load if not setting up, assuming subgen.env might exist
+        # Load if not setting up, assuming .env might exist
         load_env_variables()
 
 
@@ -157,7 +157,7 @@ def main():
 
     if not os.path.exists(subgen_script_to_run) or args.update or convert_to_bool(os.getenv('UPDATE')):
         print(f"Downloading {subgen_script_to_run} from GitHub branch {branch_name}...")
-        download_from_github(f"https://raw.githubusercontent.com/McCloudS/subgen/{branch_name}/subgen.py", subgen_script_to_run)
+        download_from_github(f"https://raw.githubusercontent.com/McCloudS/subgen/{branch_name}/transcriptarr.py", subgen_script_to_run)
         print(f"Downloading {language_code_script_to_download} from GitHub branch {branch_name}...")
         download_from_github(f"https://raw.githubusercontent.com/McCloudS/subgen/{branch_name}/language_code.py", language_code_script_to_download)
 
@@ -165,8 +165,8 @@ def main():
         print(f"{subgen_script_to_run} exists and UPDATE is set to False, skipping download.")
 
     if not args.exit_early:
-        #print(f"DEBUG environment variable for subgen.py: {os.getenv('DEBUG')}")
-        #print(f"APPEND environment variable for subgen.py: {os.getenv('APPEND')}")
+        #print(f"DEBUG environment variable for transcriptarr.py: {os.getenv('DEBUG')}")
+        #print(f"APPEND environment variable for transcriptarr.py: {os.getenv('APPEND')}")
         print(f'Launching {subgen_script_to_run}')
         try:
             subprocess.run([python_cmd, '-u', subgen_script_to_run], check=True)
@@ -176,7 +176,7 @@ def main():
             print(f"Error running {subgen_script_to_run}: {e}")
 
     else:
-        print("Not running subgen.py: -x or --exit-early set")
+        print("Not running transcriptarr.py: -x or --exit-early set")
 
 if __name__ == "__main__":
     main()

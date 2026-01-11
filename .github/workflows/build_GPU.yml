@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get version from subgen.py
+      - name: Get version from transcriptarr.py
         id: get_version
         run: |
           version=$(grep -oP "subgen_version\s*=\s*'\K[^']+" subgen.py)

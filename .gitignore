@@ -7,6 +7,6 @@
 *.vsix
 
 #ignore our settings
-subgen.env
+.env
 
 models/

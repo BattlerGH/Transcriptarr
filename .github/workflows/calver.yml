@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
     paths:
-      - 'subgen.py'
+      - '../../transcriptarr.py'
   workflow_dispatch:  # Allow manual triggering
 
 jobs:
@@ -26,11 +26,11 @@ jobs:
           echo "COMMIT_COUNT=$COMMIT_COUNT"
           echo "VERSION=${YEAR}.${MONTH}.${COMMIT_COUNT}" >> $GITHUB_ENV
 
-      - name: Update subgen.py with version
+      - name: Update transcriptarr.py with version
         run: |
           sed -i "s/subgen_version =.*/subgen_version = '${{ env.VERSION }}'/" subgen.py
 
-      - name: Check if subgen.py was actually changed (compare with HEAD)
+      - name: Check if transcriptarr.py was actually changed (compare with HEAD)
         id: check_change
         run: |
           if git diff --quiet HEAD subgen.py; then
@@ -39,7 +39,7 @@ jobs:
             echo "::set-output name=changed::true"
           fi
 
-      - name: Amend commit if subgen.py changed
+      - name: Amend commit if transcriptarr.py changed
         if: steps.check_change.outputs.changed == 'true'
         env:
           GIT_AUTHOR_NAME: "McCloudS"
