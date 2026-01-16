@@ -10,3 +10,11 @@
 .env
 
 models/
+
+transcriptarr.db
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
