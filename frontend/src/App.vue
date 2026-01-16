@@ -10,7 +10,7 @@
       <div class="container">
         <div class="header-content">
           <div class="logo">
-            <h1>🎬 TranscriptorIO</h1>
+            <h1>🎬 Transcriptarr</h1>
             <span class="subtitle">AI-Powered Subtitle Transcription</span>
           </div>
           <nav class="main-nav">
@@ -41,7 +41,7 @@
 
     <footer class="app-footer">
       <div class="container">
-        <p>&copy; 2026 TranscriptorIO | Powered by Whisper AI</p>
+        <p>&copy; 2026 Transcriptarr | Powered by Whisper AI</p>
       </div>
     </footer>
   </div>

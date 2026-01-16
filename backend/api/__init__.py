@@ -1,4 +1,4 @@
-"""API module for TranscriptorIO backend."""
+"""API module for Transcriptarr backend."""
 from backend.api.workers import router as workers_router
 from backend.api.jobs import router as jobs_router
 from backend.api.scan_rules import router as scan_rules_router

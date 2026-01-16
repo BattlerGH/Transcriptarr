@@ -1,4 +1,4 @@
-"""Configuration management for TranscriptorIO.
+"""Configuration management for Transcriptarr.
 
 Most configuration is now stored in the database and managed through the
 Settings service. Only DATABASE_URL is loaded from environment variables.

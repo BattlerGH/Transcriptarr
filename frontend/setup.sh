@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🎬 TranscriptorIO Frontend - Setup Script"
+echo "🎬 Transcriptarr Frontend - Setup Script"
 echo "=========================================="
 echo ""
 

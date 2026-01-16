@@ -1,1 +1,1 @@
-"""TranscriptorIO Backend Package."""
+"""Transcriptarr Backend Package."""

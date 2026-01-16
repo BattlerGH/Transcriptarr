@@ -1,4 +1,4 @@
-"""Main FastAPI application for TranscriptorIO backend."""
+"""Main FastAPI application for Transcriptarr backend."""
 import logging
 import os
 from contextlib import asynccontextmanager
@@ -47,7 +47,7 @@ async def lifespan(app: FastAPI):
     - Graceful shutdown
     """
     # === STARTUP ===
-    logger.info("=== TranscriptorIO Backend Starting ===")
+    logger.info("=== Transcriptarr Backend Starting ===")
 
     # Initialize database
     logger.info("Initializing database...")
@@ -158,12 +158,12 @@ async def lifespan(app: FastAPI):
         else:
             logger.info("File watcher enabled but no library paths configured")
 
-    logger.info("=== TranscriptorIO Backend Started ===")
+    logger.info("=== Transcriptarr Backend Started ===")
 
     yield
 
     # === SHUTDOWN ===
-    logger.info("=== TranscriptorIO Backend Shutting Down ===")
+    logger.info("=== Transcriptarr Backend Shutting Down ===")
 
     # Stop library scanner first (quick operations)
     logger.info("Stopping library scanner...")
@@ -180,12 +180,12 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"Error stopping worker pool: {e}")
 
-    logger.info("=== TranscriptorIO Backend Stopped ===")
+    logger.info("=== Transcriptarr Backend Stopped ===")
 
 
 # Create FastAPI app
 app = FastAPI(
-    title="TranscriptorIO API",
+    title="Transcriptarr API",
     description="AI-powered subtitle transcription service",
     version="1.0.0",
     lifespan=lifespan
@@ -278,7 +278,7 @@ else:
     async def root():
         """Root endpoint - API info."""
         return {
-            "name": "TranscriptorIO API",
+            "name": "Transcriptarr API",
             "version": "1.0.0",
             "status": "running",
             "message": "Frontend not built. Access API docs at /docs"

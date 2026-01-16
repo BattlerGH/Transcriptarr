@@ -1,4 +1,4 @@
-# TranscriptorIO Configuration
+# Transcriptarr Configuration
 
 Complete documentation for the configuration system.
 
@@ -16,7 +16,7 @@ Complete documentation for the configuration system.
 
 ## Overview
 
-TranscriptorIO uses a **database-backed configuration system**. All settings are stored in the `system_settings` table and can be managed through:
+Transcriptarr uses a **database-backed configuration system**. All settings are stored in the `system_settings` table and can be managed through:
 
 1. **Setup Wizard** (first run)
 2. **Web UI** (Settings page)

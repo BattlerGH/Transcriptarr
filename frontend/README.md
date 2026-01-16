@@ -1,6 +1,6 @@
-# TranscriptorIO Frontend
+# Transcriptarr Frontend
 
-Vue 3 + TypeScript + Vite frontend for TranscriptorIO.
+Vue 3 + TypeScript + Vite frontend for Transcriptarr.
 
 ## 🚀 Quick Start
 

@@ -1,1 +1,1 @@
-"""TranscriptorIO Core Module."""
+"""Transcriptarr Core Module."""

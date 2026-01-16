@@ -1,4 +1,4 @@
-# 🎬 TranscriptorIO
+# 🎬 Transcriptarr
 
 **AI-powered subtitle transcription service with REST API and Web UI**
 
@@ -7,7 +7,7 @@
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.x-brightgreen.svg)](https://vuejs.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-TranscriptorIO is an AI-powered subtitle transcription service based on [Subgen](https://github.com/McCloudS/subgen), featuring a modern FastAPI backend with 45+ REST endpoints, a Vue 3 web interface, and a distributed worker pool architecture.
+Transcriptarr is an AI-powered subtitle transcription service based on [Subgen](https://github.com/McCloudS/subgen), featuring a modern FastAPI backend with 45+ REST endpoints, a Vue 3 web interface, and a distributed worker pool architecture.
 
 ---
 

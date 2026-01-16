@@ -1,7 +1,7 @@
 {
   "name": "transcriptorio-ui",
   "version": "1.0.0",
-  "description": "TranscriptorIO Web UI - Vue 3 Frontend",
+  "description": "Transcriptarr Web UI - Vue 3 Frontend",
   "type": "module",
   "scripts": {
     "dev": "vite",

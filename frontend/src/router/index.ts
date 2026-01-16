@@ -46,7 +46,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _from, next) => {
-  document.title = `${to.meta.title || 'TranscriptorIO'} - TranscriptorIO`
+  document.title = `${to.meta.title || 'Transcriptarr'} - Transcriptarr`
   next()
 })
 

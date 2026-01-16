@@ -1,6 +1,6 @@
-# TranscriptorIO REST API
+# Transcriptarr REST API
 
-Documentación completa de las APIs REST del backend de TranscriptorIO.
+Documentación completa de las APIs REST del backend de Transcriptarr.
 
 ## 🚀 Inicio Rápido
 
@@ -33,7 +33,7 @@ Información básica de la API.
 **Response:**
 ```json
 {
-  "name": "TranscriptorIO API",
+  "name": "Transcriptarr API",
   "version": "1.0.0",
   "status": "running"
 }

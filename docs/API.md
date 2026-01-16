@@ -1,6 +1,6 @@
-# TranscriptorIO REST API
+# Transcriptarr REST API
 
-Complete documentation for the TranscriptorIO backend REST API.
+Complete documentation for the Transcriptarr backend REST API.
 
 ## Table of Contents
 
@@ -52,7 +52,7 @@ Root endpoint - API info or frontend (if built).
 **Response (API mode):**
 ```json
 {
-  "name": "TranscriptorIO API",
+  "name": "Transcriptarr API",
   "version": "1.0.0",
   "status": "running",
   "message": "Frontend not built. Access API docs at /docs"

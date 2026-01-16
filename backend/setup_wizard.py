@@ -36,7 +36,7 @@ class SetupWizard:
             True if setup completed successfully
         """
         print("\n" + "=" * 70)
-        print("  🎬 TranscriptorIO - First Run Setup Wizard")
+        print("  🎬 Transcriptarr - First Run Setup Wizard")
         print("=" * 70 + "\n")
 
         # Step 1: Select mode

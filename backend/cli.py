@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CLI entry point for TranscriptorIO backend."""
+"""CLI entry point for Transcriptarr backend."""
 import argparse
 import logging
 import sys
@@ -15,7 +15,7 @@ def main():
     """Main CLI entry point."""
 
     parser = argparse.ArgumentParser(
-        description="TranscriptorIO - AI-powered subtitle transcription service"
+        description="Transcriptarr - AI-powered subtitle transcription service"
     )
 
     # Subcommands
@@ -113,7 +113,7 @@ def main():
 
 def run_server(args):
     """Run FastAPI server."""
-    print(f"🚀 Starting TranscriptorIO server on {args.host}:{args.port}")
+    print(f"🚀 Starting Transcriptarr server on {args.host}:{args.port}")
     print(f"📖 API docs available at: http://{args.host}:{args.port}/docs")
 
     uvicorn.run(

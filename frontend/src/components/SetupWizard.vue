@@ -2,14 +2,14 @@
   <div class="setup-wizard-overlay">
     <div class="wizard-container">
       <div class="wizard-header">
-        <h1>🎬 Welcome to TranscriptorIO</h1>
+        <h1>🎬 Welcome to Transcriptarr</h1>
         <p>Let's get you set up in just a few steps</p>
       </div>
 
       <!-- Step 1: Choose Mode -->
       <div v-if="currentStep === 1" class="wizard-step">
         <h2>Choose Operation Mode</h2>
-        <p class="step-description">How would you like to use TranscriptorIO?</p>
+        <p class="step-description">How would you like to use Transcriptarr?</p>
 
         <div class="mode-cards">
           <div
@@ -150,7 +150,7 @@
           <!-- Scanner Configuration -->
           <div class="config-section">
             <h3 class="section-title">⏰ Automatic Scanning</h3>
-            <p class="section-description">How often should TranscriptorIO scan your libraries for new content?</p>
+            <p class="section-description">How often should Transcriptarr scan your libraries for new content?</p>
 
             <div class="scanner-config">
               <div class="form-group">
@@ -298,7 +298,7 @@
       <!-- Step 2b: Bazarr Slave Configuration -->
       <div v-if="currentStep === 2 && selectedMode === 'bazarr_slave'" class="wizard-step">
         <h2>Bazarr Provider Configuration</h2>
-        <p class="step-description">Use these details to add TranscriptorIO as a provider in Bazarr</p>
+        <p class="step-description">Use these details to add Transcriptarr as a provider in Bazarr</p>
 
         <div v-if="bazarrInfo" class="bazarr-info-card">
           <div class="info-section">
@@ -319,7 +319,7 @@
 
           <div class="info-section">
             <h3>Provider Type</h3>
-            <code>TranscriptorIO (Whisper AI)</code>
+            <code>Transcriptarr (Whisper AI)</code>
           </div>
 
           <div class="info-instructions">
@@ -346,7 +346,7 @@
       <div v-if="currentStep === 5" class="wizard-step completion">
         <div class="completion-icon">✅</div>
         <h2>Setup Complete!</h2>
-        <p>TranscriptorIO is ready to use</p>
+        <p>Transcriptarr is ready to use</p>
         <button @click="finishSetup" class="btn btn-primary btn-lg">
           Go to Dashboard →
         </button>

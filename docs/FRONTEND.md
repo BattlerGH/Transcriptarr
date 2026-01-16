@@ -1,4 +1,4 @@
-# TranscriptorIO Frontend
+# Transcriptarr Frontend
 
 Technical documentation for the Vue 3 frontend application.
 
@@ -20,7 +20,7 @@ Technical documentation for the Vue 3 frontend application.
 
 ## Overview
 
-The TranscriptorIO frontend is a Single Page Application (SPA) built with Vue 3, featuring:
+The Transcriptarr frontend is a Single Page Application (SPA) built with Vue 3, featuring:
 
 - **6 Complete Views**: Dashboard, Queue, Scanner, Rules, Workers, Settings
 - **Real-time Updates**: Polling-based status updates

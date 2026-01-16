@@ -1,4 +1,4 @@
-# TranscriptorIO Backend Architecture
+# Transcriptarr Backend Architecture
 
 Technical documentation of the backend architecture, components, and data flow.
 
@@ -22,7 +22,7 @@ Technical documentation of the backend architecture, components, and data flow.
 
 ## Overview
 
-TranscriptorIO is built with a modular architecture consisting of:
+Transcriptarr is built with a modular architecture consisting of:
 
 - **FastAPI Server**: REST API with 45+ endpoints
 - **Worker Pool**: Multiprocessing-based transcription workers (CPU/GPU)
