@@ -4,16 +4,28 @@ uvicorn[standard]
 python-multipart
 requests
 python-dotenv>=1.0.0
+psutil>=5.9.0
+python-dateutil>=2.8.0
 
 # Database & ORM (SQLite is built-in)
 sqlalchemy>=2.0.0
 pydantic>=2.0.0
 pydantic-settings>=2.0.0
 
-# Media processing (CPU-only by default)
+# Media processing
 numpy
 ffmpeg-python
 watchdog
+apscheduler>=3.10.0
+av>=10.0.0
+
+# Whisper transcription (required)
+openai-whisper
+faster-whisper
+stable-ts
+
+# Translation (required for translate mode)
+deep-translator>=1.11.0
 
 # Optional dependencies (install based on configuration):
 #
@@ -23,11 +35,6 @@ watchdog
 # For MariaDB/MySQL database:
 #   pip install pymysql
 #
-# For Whisper transcription:
-#   pip install openai-whisper faster-whisper stable-ts
-#
 # For GPU support (NVIDIA):
 #   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-#
-# For media file handling:
-#   pip install av>=10.0.0
+#   pip install nvidia-ml-py3
