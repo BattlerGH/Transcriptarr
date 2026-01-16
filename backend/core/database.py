@@ -57,7 +57,7 @@ class Database:
                 settings.database_url,
                 connect_args=connect_args,
                 poolclass=poolclass,
-                echo=settings.debug,
+                echo=False,
             )
 
             @event.listens_for(engine, "connect")
@@ -85,7 +85,7 @@ class Database:
                 pool_size=10,
                 max_overflow=20,
                 pool_pre_ping=True,  # Verify connections before using
-                echo=settings.debug,
+                echo=False,
             )
 
         elif settings.database_type in (DatabaseType.MARIADB, DatabaseType.MYSQL):
@@ -107,11 +107,17 @@ class Database:
                 pool_size=10,
                 max_overflow=20,
                 pool_pre_ping=True,
-                echo=settings.debug,
+                echo=False,
             )
 
         else:
             raise ValueError(f"Unsupported database type: {settings.database_type}")
+
+        # Disable SQLAlchemy INFO logs for cleaner output
+        logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
+        logging.getLogger('sqlalchemy.pool').setLevel(logging.WARNING)
+        logging.getLogger('sqlalchemy.dialects').setLevel(logging.WARNING)
+        logging.getLogger('sqlalchemy.orm').setLevel(logging.WARNING)
 
         return engine
 
@@ -119,6 +125,8 @@ class Database:
         """Check if tables exist and create them if they don't."""
         # Import models to register them with Base.metadata
         from backend.core import models  # noqa: F401
+        from backend.core import settings_model  # noqa: F401
+        from backend.scanning import models as scanning_models  # noqa: F401
         from sqlalchemy import inspect
 
         inspector = inspect(self.engine)
@@ -135,6 +143,8 @@ class Database:
         """Create all database tables."""
         # Import models to register them with Base.metadata
         from backend.core import models  # noqa: F401
+        from backend.core import settings_model  # noqa: F401
+        from backend.scanning import models as scanning_models  # noqa: F401
 
         logger.info("Creating database tables...")
         Base.metadata.create_all(bind=self.engine, checkfirst=True)
@@ -149,6 +159,28 @@ class Database:
         else:
             logger.error(f"Failed to create tables. Existing tables: {created_tables}")
             raise RuntimeError("Failed to create database tables")
+
+    def init_db(self):
+        """
+        Initialize database.
+
+        Ensures tables exist and are up to date.
+        Safe to call multiple times.
+        """
+        logger.info("Initializing database...")
+        self._ensure_tables_exist()
+        logger.info("Database initialization complete")
+
+    def reset_db(self):
+        """
+        Reset database (drop and recreate all tables).
+
+        WARNING: This deletes ALL data!
+        """
+        logger.warning("Resetting database - ALL DATA WILL BE LOST")
+        self.drop_tables()
+        self.create_tables()
+        logger.info("Database reset complete")
 
     def drop_tables(self):
         """Drop all database tables (use with caution!)."""

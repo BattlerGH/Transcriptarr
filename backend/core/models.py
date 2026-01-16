@@ -1,6 +1,6 @@
 """Database models for TranscriptorIO."""
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Optional
 
@@ -10,6 +10,12 @@ from sqlalchemy import (
 from sqlalchemy.sql import func
 
 from backend.core.database import Base
+
+
+class JobType(str, Enum):
+    """Job type classification."""
+    TRANSCRIPTION = "transcription"      # Regular transcription/translation job
+    LANGUAGE_DETECTION = "language_detection"  # Language detection only
 
 
 class JobStatus(str, Enum):
@@ -24,7 +30,9 @@ class JobStatus(str, Enum):
 class JobStage(str, Enum):
     """Job processing stages."""
     PENDING = "pending"
+    LOADING_MODEL = "loading_model"
     DETECTING_LANGUAGE = "detecting_language"
+    LANGUAGE_DETECTION = "language_detection"  # Alias for backward compatibility
     EXTRACTING_AUDIO = "extracting_audio"
     TRANSCRIBING = "transcribing"
     TRANSLATING = "translating"
@@ -49,6 +57,14 @@ class Job(Base):
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     file_path = Column(String(1024), nullable=False, index=True)
     file_name = Column(String(512), nullable=False)
+
+    # Job classification
+    job_type = Column(
+        SQLEnum(JobType),
+        nullable=False,
+        default=JobType.TRANSCRIPTION,
+        index=True
+    )
 
     # Job status
     status = Column(
@@ -126,15 +142,25 @@ class Job(Base):
 
     @property
     def can_retry(self) -> bool:
-        """Check if job can be retried."""
-        return self.status == JobStatus.FAILED and self.retry_count < self.max_retries
+        """Check if job can be retried. Always allow retry for failed jobs."""
+        return self.status == JobStatus.FAILED
 
     def to_dict(self) -> dict:
         """Convert job to dictionary for API responses."""
+        def format_datetime(dt):
+            """Format datetime as ISO string with UTC timezone."""
+            if not dt:
+                return None
+            # If timezone-naive, assume UTC
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.isoformat()
+
         return {
             "id": self.id,
             "file_path": self.file_path,
             "file_name": self.file_name,
+            "job_type": self.job_type.value if self.job_type else "transcription",
             "status": self.status.value,
             "priority": self.priority,
             "source_lang": self.source_lang,
@@ -144,9 +170,9 @@ class Job(Base):
             "progress": self.progress,
             "current_stage": self.current_stage.value if self.current_stage else None,
             "eta_seconds": self.eta_seconds,
-            "created_at": self.created_at.isoformat() if self.created_at else None,
-            "started_at": self.started_at.isoformat() if self.started_at else None,
-            "completed_at": self.completed_at.isoformat() if self.completed_at else None,
+            "created_at": format_datetime(self.created_at),
+            "started_at": format_datetime(self.started_at),
+            "completed_at": format_datetime(self.completed_at),
             "output_path": self.output_path,
             "segments_count": self.segments_count,
             "error": self.error,
@@ -168,13 +194,13 @@ class Job(Base):
     def mark_started(self, worker_id: str):
         """Mark job as started."""
         self.status = JobStatus.PROCESSING
-        self.started_at = datetime.utcnow()
+        self.started_at = datetime.now(timezone.utc)
         self.worker_id = worker_id
 
     def mark_completed(self, output_path: str, segments_count: int, srt_content: Optional[str] = None):
         """Mark job as completed."""
         self.status = JobStatus.COMPLETED
-        self.completed_at = datetime.utcnow()
+        self.completed_at = datetime.now(timezone.utc)
         self.output_path = output_path
         self.segments_count = segments_count
         self.srt_content = srt_content
@@ -182,19 +208,24 @@ class Job(Base):
         self.current_stage = JobStage.FINALIZING
 
         if self.started_at:
-            self.processing_time_seconds = (self.completed_at - self.started_at).total_seconds()
+            # Handle both timezone-aware and timezone-naive datetimes
+            started = self.started_at
+            if started.tzinfo is None:
+                # Convert naive datetime to UTC timezone-aware
+                started = started.replace(tzinfo=timezone.utc)
+            self.processing_time_seconds = (self.completed_at - started).total_seconds()
 
     def mark_failed(self, error: str):
         """Mark job as failed."""
         self.status = JobStatus.FAILED
-        self.completed_at = datetime.utcnow()
+        self.completed_at = datetime.now(timezone.utc)
         self.error = error
         self.retry_count += 1
 
     def mark_cancelled(self):
         """Mark job as cancelled."""
         self.status = JobStatus.CANCELLED
-        self.completed_at = datetime.utcnow()
+        self.completed_at = datetime.now(timezone.utc)
 
 
 # Create indexes for common queries
